@@ -4,10 +4,10 @@ set :rails_env, 'production'
 set :branch, 'master'
 
 set :unicorn_worker_num, 2
-set :listen_port, 12400
+set :port, 12400
 
-set :pid_file, "#{deploy_to}/current/tmp/pids/unicorn.pid"
-set :unicorn_config_file, "#{current_path}/config/unicorn.rb"
+# set :pid_file, "#{deploy_to}/current/tmp/pids/unicorn.pid"
+# set :unicorn_config_file, "#{current_path}/config/unicorn.rb"
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.

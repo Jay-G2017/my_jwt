@@ -11,26 +11,6 @@ set :rvm_type, :user                     # Defaults to: :auto
 set :rvm_ruby_version, '2.4.6'
 
 
-namespace :deploy do
-  task :start do
-    on roles(:app) do
-      execute %{source /home/deploy/.rvm/scripts/rvm && cd #{current_path} && if [ ! -f #{fetch(:pid_file)} ]; then UNICORN_WORKER_NUM=#{fetch(:unicorn_worker_num)} RAILS_ENV=#{fetch(:rails_env)} APP_PORT=#{fetch(:listen_port)} SERVER_STAGE=#{fetch(:server_stage)} bundle exec unicorn -c #{fetch(:unicorn_config_file)} -D; fi}
-    end
-  end
-
-  task :stop do
-    on roles(:app) do
-      execute %{source /home/deploy/.rvm/scripts/rvm && cd #{current_path} && if [ -f #{fetch(:pid_file)} ] && kill -0 `cat #{fetch(:pid_file)}`> /dev/null 2>&1; then kill -QUIT `cat #{fetch(:pid_file)}`; else rm #{fetch(:pid_file)} || exit 0; fi}
-    end
-  end
-
-  task :restart do
-    on roles(:app) do
-      execute %{source /home/deploy/.rvm/scripts/rvm && cd #{current_path} && if [ -f #{fetch(:pid_file)} ] && kill -0 `cat #{fetch(:pid_file)}`> /dev/null 2>&1; then kill -HUP `cat #{fetch(:pid_file)}`; else rm #{fetch(:pid_file)} || source ~/.nvm/nvm.sh && SKIP_DATA_LOAD=false UNICORN_WORKER_NUM=#{fetch(:unicorn_worker_num)} RAILS_ENV=#{fetch(:env)} APP_PORT=#{fetch(:listen_port)} SERVER_STAGE=#{fetch(:server_stage)} bundle exec unicorn -c #{fetch(:unicorn_config_file)} -D; fi}
-    end
-  end
-end
-
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 

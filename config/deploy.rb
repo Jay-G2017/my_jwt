@@ -4,7 +4,7 @@ lock "~> 3.11.1"
 set :application, "my_jwt"
 set :repo_url, "git@github.com:Jay-G2017/my_jwt.git"
 
-# append :linked_files, "config/database.yml"
+append :linked_files, "config/database.yml", "config/master.key"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets",'vendor/bundle'
 
 set :rvm_type, :user                     # Defaults to: :auto

@@ -1,12 +1,11 @@
 server "ttnote_deploy", roles: [:app], :primary => true
 set :deploy_to, "/var/www/my_jwt/"
 set :rails_env, 'production'
-set :branch, 'feat/puma_deploy'
+set :branch, 'master'
 
-set :unicorn_worker_num, 2
-set :port, 12400
 set :puma_threads, [0, 5]
 set :puma_workers, 2
+append :puma_bind, "tcp://0.0.0.0:12400"
 
 # set :pid_file, "#{deploy_to}/current/tmp/pids/unicorn.pid"
 # set :unicorn_config_file, "#{current_path}/config/unicorn.rb"
